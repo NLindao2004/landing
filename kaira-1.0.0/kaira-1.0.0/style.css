@@ -1540,3 +1540,10 @@ a.btn-link.text-light:after {
   background-size: cover;
   transition: transform .3s ease-out;
 }
+
+
+
+.fondo1{
+  background: url(images/fondo.png) no-repeat center center fixed;
+  background-size: cover;
+}
