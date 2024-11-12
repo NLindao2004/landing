@@ -1545,10 +1545,6 @@ a.btn-link.text-light:after {
 
 
 
-
-
-
-
 .fondo1{
   background: url(images/fondo.png) no-repeat center center fixed;
   background-size: cover;
@@ -1559,9 +1555,6 @@ a.btn-link.text-light:after {
   width: 100%;
   height: 100%;
 }
-
-
-
 
 
 .flip-card {
@@ -1619,3 +1612,4 @@ a.btn-link.text-light:after {
 .fondo2{
   background: #000000 !important;
 } 
+
