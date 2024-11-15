@@ -197,8 +197,8 @@ const loadSwiperFromAPI = async () => {
       const characters = await response.json();
   
       // Seleccionar el contenedor del Swiper
-      const swiperContent = document.getElementById("swiperContent");
-      swiperContent.innerHTML = ''; // Limpiar contenido previo
+      const mugiwuaras = document.getElementById("mugiwuaras");
+      mugiwuaras.innerHTML = ''; // Limpiar contenido previo
   
       // Crear diapositivas dinámicamente
       characters.forEach((character) => {
@@ -213,7 +213,7 @@ const loadSwiperFromAPI = async () => {
             </div>
           </div>
         `;
-        swiperContent.innerHTML += slide; // Agregar cada diapositiva al contenedor
+        mugiwuaras.innerHTML += slide; // Agregar cada diapositiva al contenedor
       });
   
       // Inicializar Swiper después de cargar los datos
@@ -239,3 +239,13 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("DOMContentLoaded", ready);
 window.addEventListener("load", loaded);
     
+
+
+
+
+
+
+
+
+
+

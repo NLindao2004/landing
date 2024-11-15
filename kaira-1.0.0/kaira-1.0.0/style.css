@@ -1613,3 +1613,6 @@ a.btn-link.text-light:after {
   background: #000000 !important;
 } 
 
+.description-generation{
+  justify-content: center;
+}
