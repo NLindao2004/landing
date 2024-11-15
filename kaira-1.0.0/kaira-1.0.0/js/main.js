@@ -183,7 +183,7 @@ const loadOnePieceFruits = async () => {
     }
 }
 
-const loadSwiperFromAPI = async () => {
+const loadPersonajes = async () => {
     try {
       // URL de la API
       const apiURL = 'https://personajes-f11b3-default-rtdb.firebaseio.com/.json';
@@ -231,9 +231,68 @@ const loadSwiperFromAPI = async () => {
     }
   };
 
+
+
+
+  const prueba = async () => {
+    try {
+      // URL de la API
+      const apiURL = 'https://gears-523d1-default-rtdb.firebaseio.com/.json';
+  
+      // Solicitar datos de la API
+      const response = await fetch(apiURL);
+      if (!response.ok) {
+        throw new Error(`Error al obtener datos: ${response.status}`);
+      }
+  
+      const characters = await response.json();
+  
+      // Seleccionar el contenedor del Swiper
+      const mugiwuaras = document.getElementById("prueba");
+      mugiwuaras.innerHTML = ''; // Limpiar contenido previo
+  
+      // Crear diapositivas dinámicamente
+      characters.forEach((character) => {
+        const slide = `
+          <div class="swiper-slide"> <!-- Clase swiper-slide añadida -->
+            <div class="card-container">
+              <div class="card">
+                <div class="front-content">
+                  <img src="${character['filename']}" alt="${character.name}" class="img-fluid rounded" style="max-height: 300px; object-fit: cover;">
+                </div>
+                <div class="content">
+                  <h5>${character.name}</h5>
+                  <p><strong>Description:</strong> ${character.description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        mugiwuaras.innerHTML += slide; // Agregar cada diapositiva al contenedor
+      });
+  
+      // Inicializar Swiper después de cargar los datos
+      new Swiper('.product-swiper', {
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        slidesPerView: 3,
+        spaceBetween: 20,
+        
+      });
+    } catch (error) {
+      console.error("Error al cargar Swiper:", error);
+    }
+  };
+
+  
+
 document.addEventListener("DOMContentLoaded", () => {
     loadOnePieceFruits();
-    loadSwiperFromAPI();
+    loadPersonajes();
+    prueba();
 });
 
 window.addEventListener("DOMContentLoaded", ready);
