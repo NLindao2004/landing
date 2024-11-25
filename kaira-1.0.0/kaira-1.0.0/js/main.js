@@ -287,12 +287,80 @@ const loadPersonajes = async () => {
     }
   };
 
+  function updateImage() {
+    const select = document.getElementById("form_initial");
+    const selectedValue = select.value;
+    const image = document.getElementById("dynamic-image");
+
+    if (selectedValue === "A") {
+      image.src = "images/fruta1.png"; // Ruta de la imagen para A
+      image.alt = "Imagen de la inicial A";
+      image.style.display = "block";
+    } else if (selectedValue === "B") {
+      image.src = "images/fruta2.png"; // Ruta de la imagen para B
+      image.alt = "Imagen de la inicial B";
+      image.style.display = "block";
+    } else if (selectedValue === "C") {
+      image.src = "images/fruta3.png"; // Ruta de la imagen para C
+      image.alt = "Imagen de la inicial C";
+      image.style.display = "block";
+    } else {
+      image.style.display = "none"; // Oculta la imagen si no hay opción seleccionada
+    }
+  }
+
+
+
+  function updateFormLayout() {
+    const select = document.getElementById("form_initial");
+    const selectedValue = select.value;
+    const formContainer = document.getElementById("form-container");
+    let imageColumn = document.getElementById("image-column");
+    
+    if (selectedValue) {
+      if (!imageColumn) {
+        // Crear la columna de la imagen si no existe
+        imageColumn = document.createElement("div");
+        imageColumn.className = "col-md-4 d-flex align-items-center justify-content-center";
+        imageColumn.id = "image-column";
   
+        imageColumn.innerHTML = `
+          <div id="image-container" class="text-center">
+            <img id="dynamic-image" src="" alt="Imagen inicial favorita" style="max-width: 100%; height: auto;">
+          </div>
+        `;
+  
+        // Añadir la columna al contenedor del formulario
+        formContainer.classList.remove("justify-content-center");
+        formContainer.classList.add("justify-content-between");
+        formContainer.appendChild(imageColumn);
+      }
+  
+      // Actualizar la imagen según la opción seleccionada
+      const dynamicImage = document.getElementById("dynamic-image");
+      if (selectedValue === "A") {
+        dynamicImage.src = "images/fruta1.png"; // Ruta de la imagen para A
+        dynamicImage.alt = "Imagen de la inicial A";
+      } else if (selectedValue === "B") {
+        dynamicImage.src = "images/fruta2.png"; // Ruta de la imagen para B
+        dynamicImage.alt = "Imagen de la inicial B";
+      } else if (selectedValue === "C") {
+        dynamicImage.src = "images/fruta3.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      }
+    }
+  }
+  
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     loadOnePieceFruits();
     loadPersonajes();
     prueba();
+    updateFormLayout();
 });
 
 window.addEventListener("DOMContentLoaded", ready);

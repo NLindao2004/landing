@@ -1190,7 +1190,7 @@ a {
 
 /* rotating text */
 .text-rotate {
-  animation: rotation 50s infinite linear;
+  animation: rotation 50s infinite ease-out;
 }
 
 @keyframes rotation {
@@ -1636,6 +1636,10 @@ a.btn-link.text-light:after {
 
 
 
+
+
+
+
 /* From Uiverse.io by gharsh11032000 */ 
 .card-container {
   width: 400px;
@@ -1714,4 +1718,118 @@ a.btn-link.text-light:after {
 }
 
 
+  /* Form Styles */
+  .custom-form {
+    background: #1e1e2f; /* Fondo oscuro */
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    position: relative;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+  }
 
+  /* Gradient Border Effect */
+  .custom-form::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #ff0080, #7700ff, #00d4ff);
+    z-index: -1;
+    background-size: 400%;
+    animation: gradient-animation 6s infinite;
+  }
+
+  /* Gradient Animation */
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Inputs, Select, and Textarea */
+  .custom-form .form-control,
+  .custom-form .form-select {
+    background: #2b2b3b;
+    border: 1px solid #444;
+    color: #ffffff;
+    font-size: 14px;
+  }
+
+  .custom-form .form-control::placeholder,
+  .custom-form .form-select::placeholder {
+    color: #aaaaaa;
+  }
+
+  .custom-form .form-control:focus,
+  .custom-form .form-select:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+  }
+
+  /* Labels */
+  .custom-form .form-label {
+    color: #ffffff;
+  }
+
+  /* Radio Buttons */
+  .custom-form .form-check-input {
+    accent-color: #00d4ff;
+  }
+
+  /* Submit Button */
+  .custom-form .btn-success {
+    background: linear-gradient(90deg, #ff0080, #7700ff);
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .custom-form .btn-success:hover {
+    background: linear-gradient(90deg, #00d4ff, #7700ff);
+    box-shadow: 0px 4px 15px rgba(0, 212, 255, 0.5);
+  }
+
+  /* Dynamic Image Container */
+  .custom-form #image-container img {
+    border-radius: 10px;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+
+
+  /* Imagen dinámica */
+  #image-container img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+    display: block; /* Asegura que la imagen se muestra correctamente */
+  }
+  
+  .custom-form .form-check-input{
+    margin: auto;
+  }
+
+
+
+  #image-container img {
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #form-container.justify-content-between #form-column {
+    margin: 0; /* Ajusta margen para columnas */
+  }
+  
