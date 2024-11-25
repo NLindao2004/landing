@@ -1633,7 +1633,9 @@ a.btn-link.text-light:after {
 }
 
 
-
+.button-saga{
+  top:13rem !important;
+}
 
 
 
@@ -1831,5 +1833,37 @@ a.btn-link.text-light:after {
   
   #form-container.justify-content-between #form-column {
     margin: 0; /* Ajusta margen para columnas */
+  }
+  
+
+
+
+  .custom-swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .custom-swiper-slide img {
+    width: 100%; /* Ajusta el ancho al contenedor */
+    height: 300px; /* Fija la altura para que todas las imágenes tengan la misma proporción */
+    object-fit: cover; /* Recorta la imagen para mantener la proporción */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+  }
+  
+  .custom-swiper-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 10px 0 5px;
+  }
+  
+  .custom-swiper-text {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
   }
   

@@ -232,8 +232,6 @@ const loadPersonajes = async () => {
   };
 
 
-
-
   const prueba = async () => {
     try {
       // URL de la API
@@ -287,27 +285,58 @@ const loadPersonajes = async () => {
     }
   };
 
-  function updateImage() {
-    const select = document.getElementById("form_initial");
-    const selectedValue = select.value;
-    const image = document.getElementById("dynamic-image");
 
-    if (selectedValue === "A") {
-      image.src = "images/fruta1.png"; // Ruta de la imagen para A
-      image.alt = "Imagen de la inicial A";
-      image.style.display = "block";
-    } else if (selectedValue === "B") {
-      image.src = "images/fruta2.png"; // Ruta de la imagen para B
-      image.alt = "Imagen de la inicial B";
-      image.style.display = "block";
-    } else if (selectedValue === "C") {
-      image.src = "images/fruta3.png"; // Ruta de la imagen para C
-      image.alt = "Imagen de la inicial C";
-      image.style.display = "block";
-    } else {
-      image.style.display = "none"; // Oculta la imagen si no hay opción seleccionada
+
+  const loadSaga = async () => {
+    try {
+      // URL de la API
+      const apiURL = 'https://saga-18839-default-rtdb.firebaseio.com/.json';
+  
+      // Solicitar datos de la API
+      const response = await fetch(apiURL);
+      if (!response.ok) {
+        throw new Error(`Error al obtener datos: ${response.status}`);
+      }
+  
+      const characters = await response.json();
+  
+      // Seleccionar el contenedor del Swiper
+      const saga = document.getElementById("sagas");
+      saga.innerHTML = ''; // Limpiar contenido previo
+  
+      // Crear diapositivas dinámicamente
+      characters.forEach((character) => {
+        const slide = `
+          <div class="swiper-slide custom-swiper-slide">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="${character.file}" alt="${character.name}" class="custom-swiper-image">
+              <h2 class="custom-swiper-title">${character.title}</h2>
+              <p class="custom-swiper-text"><strong>Number Saga:</strong> ${character.saga_number || "N/A"}</p>
+              <p class="custom-swiper-text"><strong>Episodes:</strong> ${character.saga_episode || "N/A"}</p>
+            </div>
+          </div>
+        `;
+        saga.innerHTML += slide;
+      });
+      
+  
+      // Inicializar Swiper después de cargar los datos
+      new Swiper('.product-swiper', {
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        slidesPerView: 3,
+        spaceBetween: 20,
+      });
+    } catch (error) {
+      console.error("Error al cargar Swiper:", error);
     }
-  }
+  };
+
+
+
 
 
 
@@ -361,6 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPersonajes();
     prueba();
     updateFormLayout();
+    loadSaga();
 });
 
 window.addEventListener("DOMContentLoaded", ready);
