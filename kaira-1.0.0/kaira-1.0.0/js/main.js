@@ -1,41 +1,104 @@
 const databaseURL = 'https://landing-3d8a4-default-rtdb.firebaseio.com/coleccion.json'; 
 
-let sendData = () => {  
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+let sendData = () => {
+  const myform = document.getElementById('form');
+  const formData = new FormData(myform);
+  const data = Object.fromEntries(formData.entries());
 
-    data['saved'] = new Date().toLocaleString('es-CO', { timeZone: 'America/Guayaquil' })
+  // Validación de entrada
+  if (!data.gender) {
+    alert('Por favor, selecciona tu género.');
+    return;
+  }
 
-    fetch(databaseURL, {
-        method: 'POST', // Método de la solicitud
-        headers: {
-            'Content-Type': 'application/json' // Especifica que los datos están en formato JSON
-        },
-        body: JSON.stringify(data) // Convierte los datos a JSON
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.statusText}`);
+  if (!data.name || data.name.trim() === '') {
+    alert('Por favor, ingresa tu nombre.');
+    return;
+  }
+
+  if (!data.email || !/^\S+@\S+\.\S+$/.test(data.email)) {
+    alert('Por favor, ingresa un correo electrónico válido.');
+    return;
+  }
+
+  if (!data.initial) {
+    alert('Por favor, selecciona tu personaje favorito.');
+    return;
+  }
+
+  data['saved'] = new Date().toLocaleString('es-CO', { timeZone: 'America/Guayaquil' });
+
+  fetch(databaseURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .then(result => {
+    alert('¡Gracias por suscribirte! Nos mantendremos en contacto.');
+    myform.reset(); // Limpiar el formulario después de enviar los datos
+  })
+  .catch(error => {
+    alert('Hemos experimentado un error. ¡Vuelve pronto!');
+  });
+};
+
+let loaded = () => {
+  let myform = document.getElementById('form');
+  myform.addEventListener('submit', (eventSubmit) => {
+    eventSubmit.preventDefault(); // Evitar comportamiento predeterminado
+
+    const emailElement = document.getElementById('form_email');
+    const nameElement = document.getElementById('form_name');
+    const emailText = emailElement.value.trim();
+    const nameText = nameElement.value.trim();
+
+    // Animación si el correo está vacío
+    if (emailText.length === 0) {
+      emailElement.animate(
+        [
+          { transform: "translateX(0)" },
+          { transform: "translateX(10px)" },
+          { transform: "translateX(-10px)" },
+          { transform: "translateX(0)" }
+        ],
+        {
+          duration: 400,
+          easing: "linear",
         }
-        return response.json(); // Procesa la respuesta como JSON
-    })
+      );
+      emailElement.focus();
+      return;
+    }
 
-    .then(result => {
-        alert('Agradeciendo tu preferencia, nos mantenemos actualizados y enfocados en atenderte como mereces'); // Maneja la respuesta con un mensaje
-        form.reset()
+    // Animación si el nombre está vacío
+    if (nameText.length === 0) {
+      nameElement.animate(
+        [
+          { transform: "translateX(0)" },
+          { transform: "translateX(10px)" },
+          { transform: "translateX(-10px)" },
+          { transform: "translateX(0)" }
+        ],
+        {
+          duration: 400,
+          easing: "linear",
+        }
+      );
+      nameElement.focus();
+      return;
+    }
 
-        // Recuperación de datos
-        getData()
-    })
-
-    .then(result => {
-        alert('Agradeciendo tu preferencia, nos mantenemos actualizados y enfocados en atenderte como mereces'); // Maneja la respuesta con un mensaje
-        form.reset()
-    })
-    .catch(error => {
-        alert('Hemos experimentado un error. ¡Vuelve pronto!'); // Maneja el error con un mensaje
-    });
-}
+    sendData(); // Enviar los datos si la validación pasa
+  });
+};
 
 
 let getData = async () => { 
@@ -109,39 +172,11 @@ let getData = async () => {
 
 let ready = () => {
     console.log('DOM está listo')
-
+    loaded();
     getData();  
     
 }
 
-let loaded = () => {
-    let myform = document.getElementById('form');
-    myform.addEventListener('submit', (eventSubmit) => {
-        eventSubmit.preventDefault(); 
-        const emailElement = document.querySelector('.form-control-lg');
-           const emailText = emailElement.value;
-
-           if (emailText.length === 0) {
-            emailElement.animate(
-                [
-                    { transform: "translateX(0)" },
-                    { transform: "translateX(50px)" },
-                    { transform: "translateX(-50px)" },
-                    { transform: "translateX(0)" }
-                ],
-                {
-                    duration: 400,
-                    easing: "linear",
-                }
-            )
-            
-            return;
-           }    
-           sendData();
-
-    });
-
-}
 
 const loadOnePieceFruits = async () => {
     try {
@@ -339,16 +374,15 @@ const loadPersonajes = async () => {
 
 
 
-
   function updateFormLayout() {
     const select = document.getElementById("form_initial");
     const selectedValue = select.value;
     const formContainer = document.getElementById("form-container");
     let imageColumn = document.getElementById("image-column");
-    
+  
     if (selectedValue) {
+      // Verifica si la columna de imagen ya existe
       if (!imageColumn) {
-        // Crear la columna de la imagen si no existe
         imageColumn = document.createElement("div");
         imageColumn.className = "col-md-4 d-flex align-items-center justify-content-center";
         imageColumn.id = "image-column";
@@ -359,26 +393,41 @@ const loadPersonajes = async () => {
           </div>
         `;
   
-        // Añadir la columna al contenedor del formulario
+        // Ajusta las clases del contenedor del formulario
         formContainer.classList.remove("justify-content-center");
         formContainer.classList.add("justify-content-between");
+  
+        // Añade la columna al contenedor
         formContainer.appendChild(imageColumn);
       }
   
-      // Actualizar la imagen según la opción seleccionada
+      // Actualiza la imagen según la selección
       const dynamicImage = document.getElementById("dynamic-image");
-      if (selectedValue === "A") {
-        dynamicImage.src = "images/fruta1.png"; // Ruta de la imagen para A
-        dynamicImage.alt = "Imagen de la inicial A";
-      } else if (selectedValue === "B") {
-        dynamicImage.src = "images/fruta2.png"; // Ruta de la imagen para B
-        dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "C") {
-        dynamicImage.src = "images/fruta3.png"; // Ruta de la imagen para C
-        dynamicImage.alt = "Imagen de la inicial C";
+      switch (selectedValue) {
+        case "A":
+          dynamicImage.src = "images/fruta1.png";
+          dynamicImage.alt = "Imagen de la inicial A";
+          break;
+        case "B":
+          dynamicImage.src = "images/fruta2.png";
+          dynamicImage.alt = "Imagen de la inicial B";
+          break;
+        case "C":
+          dynamicImage.src = "images/fruta3.png";
+          dynamicImage.alt = "Imagen de la inicial C";
+          break;
+        default:
+          dynamicImage.src = "";
+          dynamicImage.alt = "Imagen no disponible";
       }
     }
   }
+  
+  // Asignar el evento al cargar la página
+  document.addEventListener("DOMContentLoaded", () => {
+    const select = document.getElementById("form_initial");
+    select.addEventListener("change", updateFormLayout);
+  });
   
 
 
