@@ -22,6 +22,11 @@ CSS STRUCTURE:
 2. GENERAL TYPOGRAPHY
 
 --------------------------------------------------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   --heading-font: "Marcellus", Roboto, sans-serif;
   --heading-font-weight: 400;

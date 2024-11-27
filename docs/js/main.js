@@ -77,8 +77,6 @@ let getData = async () => {
             // END
 
 
-
-
             // Genere y agregue filas de una tabla HTML para mostrar fechas y cantidades de suscriptores almacenadas 
             if (countSuscribers.size > 0) {
                 subscribers.innerHTML = '';  // Limpiar el contenido previo
@@ -106,13 +104,6 @@ let getData = async () => {
       }
 }
 
-
-let ready = () => {
-    console.log('DOM está listo')
-
-    getData();  
-    
-}
 
 let loaded = () => {
     let myform = document.getElementById('form');
@@ -381,20 +372,17 @@ const loadPersonajes = async () => {
   }
   
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     loadOnePieceFruits();
     loadPersonajes();
     prueba();
     updateFormLayout();
     loadSaga();
+    getData(); 
+    loaded();
 });
 
-window.addEventListener("DOMContentLoaded", ready);
-window.addEventListener("load", loaded);
+
     
 
 
