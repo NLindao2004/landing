@@ -1,41 +1,41 @@
-const databaseURL = 'https://landing-3d8a4-default-rtdb.firebaseio.com/coleccion.json'; 
+const databaseURL = 'https://landing-3d8a4-default-rtdb.firebaseio.com/coleccion.json';
 
-let sendData = () => {  
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+let sendData = () => {
+  const form = document.getElementById('form'); // Obtener el formulario
+  const formData = new FormData(form); // Crear un objeto FormData
 
-    data['saved'] = new Date().toLocaleString('es-CO', { timeZone: 'America/Guayaquil' })
+  // Convertir FormData a un objeto JSON
+  const data = Object.fromEntries(formData.entries());
 
-    fetch(databaseURL, {
-        method: 'POST', // Método de la solicitud
-        headers: {
-            'Content-Type': 'application/json' // Especifica que los datos están en formato JSON
-        },
-        body: JSON.stringify(data) // Convierte los datos a JSON
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.statusText}`);
-        }
-        return response.json(); // Procesa la respuesta como JSON
-    })
+  // Agregar la fecha y hora de registro al objeto
+  data['saved'] = new Date().toLocaleString('es-CO', { timeZone: 'America/Guayaquil' });
 
-    .then(result => {
-        alert('Agradeciendo tu preferencia, nos mantenemos actualizados y enfocados en atenderte como mereces'); // Maneja la respuesta con un mensaje
-        form.reset()
+  // Enviar los datos a la base de datos Firebase
+  fetch(databaseURL, {
+      method: 'POST', // Método POST para enviar datos
+      headers: {
+          'Content-Type': 'application/json', // Especificar que se envía JSON
+      },
+      body: JSON.stringify(data), // Convertir los datos a JSON
+  })
+  .then((response) => {
+      if (!response.ok) {
+          throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+      return response.json(); // Procesar la respuesta como JSON
+  })
+  .then((result) => {
+      // Mostrar notificación de éxito al completar la solicitud
+      showNotification("¡Gracias por suscribirte! Nos pondremos en contacto pronto.", "success");
+      form.reset(); // Limpiar el formulario después de enviar los datos
+  })
+  .catch((error) => {
+      // Mostrar notificación de error si algo falla
+      showNotification("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.", "error");
+      console.error(error); // Mostrar el error en la consola para depuración
+  });
+};
 
-        // Recuperación de datos
-        getData()
-    })
-
-    .then(result => {
-        alert('Agradeciendo tu preferencia, nos mantenemos actualizados y enfocados en atenderte como mereces'); // Maneja la respuesta con un mensaje
-        form.reset()
-    })
-    .catch(error => {
-        alert('Hemos experimentado un error. ¡Vuelve pronto!'); // Maneja el error con un mensaje
-    });
-}
 
 
 let getData = async () => { 
@@ -109,7 +109,7 @@ let loaded = () => {
     let myform = document.getElementById('form');
     myform.addEventListener('submit', (eventSubmit) => {
         eventSubmit.preventDefault(); 
-        const emailElement = document.querySelector('.form-control-lg');
+        const emailElement = document.getElementById('form_email');
            const emailText = emailElement.value;
 
            if (emailText.length === 0) {
@@ -216,6 +216,8 @@ const loadPersonajes = async () => {
         },
         slidesPerView: 3,
         spaceBetween: 20,
+
+        
       });
     } catch (error) {
       console.error("Error al cargar Swiper:", error);
@@ -358,28 +360,91 @@ const loadPersonajes = async () => {
   
       // Actualizar la imagen según la opción seleccionada
       const dynamicImage = document.getElementById("dynamic-image");
-      if (selectedValue === "A") {
-        dynamicImage.src = "images/fruta1.png"; // Ruta de la imagen para A
+      if (selectedValue === "luffy") {
+        dynamicImage.src = "images/form/luffyform.png"; // Ruta de la imagen para A
         dynamicImage.alt = "Imagen de la inicial A";
-      } else if (selectedValue === "B") {
-        dynamicImage.src = "images/fruta2.png"; // Ruta de la imagen para B
+      } else if (selectedValue === "zoro") {
+        dynamicImage.src = "images/form/zoroform.png"; // Ruta de la imagen para B
         dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "C") {
-        dynamicImage.src = "images/fruta3.png"; // Ruta de la imagen para C
+      } else if (selectedValue === "sanji") {
+        dynamicImage.src = "images/form/sanjiform.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      } else if (selectedValue === "usop") {
+        dynamicImage.src = "images/form/usopform.png"; // Ruta de la imagen para B
+        dynamicImage.alt = "Imagen de la inicial B";
+      } else if (selectedValue === "nami") {
+        dynamicImage.src = "images/form/namiform.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      } else if (selectedValue === "robin") {
+        dynamicImage.src = "images/form/robinform.png"; // Ruta de la imagen para B
+        dynamicImage.alt = "Imagen de la inicial B";
+      } else if (selectedValue === "franky") {
+        dynamicImage.src = "images/form/frankyform.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      } else if (selectedValue === "brook") {
+        dynamicImage.src = "images/form/brookform.png"; // Ruta de la imagen para B
+        dynamicImage.alt = "Imagen de la inicial B";
+      } else if (selectedValue === "chopper") {
+        dynamicImage.src = "images/form/chopperform.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      } else if (selectedValue === "jimbe") {
+        dynamicImage.src = "images/form/jimbeform.png"; // Ruta de la imagen para B
+        dynamicImage.alt = "Imagen de la inicial B";
+      } else if (selectedValue === "ace") {
+        dynamicImage.src = "images/form/aceform.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      }else if (selectedValue === "sabo") {
+        dynamicImage.src = "images/form/saboform.png"; // Ruta de la imagen para C
+        dynamicImage.alt = "Imagen de la inicial C";
+      }else if (selectedValue === "shanks") {
+        dynamicImage.src = "images/form/shanksform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
       }
     }
   }
+
+
+  const showNotification = (message, type = "success") => {
+    const container = document.getElementById("notification-container");
+  
+    // Crear el elemento de notificación
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+  
+    // Opcional: Cambiar el color según el tipo (success, error, etc.)
+    if (type === "error") {
+      notification.style.backgroundColor = "#f2dede";
+      notification.style.color = "#a94442";
+      notification.style.border = "1px solid #ebccd1";
+    }
+  
+    // Contenido de la notificación
+    notification.innerHTML = `
+      <span class="icon">${type === "success" ? "✔️" : "❌"}</span>
+      <span>${message}</span>
+      <button class="close" onclick="this.parentElement.remove()">✖</button>
+    `;
+  
+    // Añadir la notificación al contenedor
+    container.appendChild(notification);
+  
+    // Remover automáticamente la notificación después de 5 segundos
+    setTimeout(() => {
+      notification.remove();
+    }, 5000);
+  };
   
 
+
 document.addEventListener("DOMContentLoaded", () => {
+    loaded();
     loadOnePieceFruits();
     loadPersonajes();
     prueba();
     updateFormLayout();
     loadSaga();
     getData(); 
-    loaded();
+    
 });
 
 
