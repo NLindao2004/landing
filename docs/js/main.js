@@ -58,43 +58,40 @@ let getData = async () => {
         if(data != null) {
 
             // Cuente el número de suscriptores registrados por fecha a partir del objeto data
-            let countSuscribers = new Map();
+            let countCharacters  = new Map();
 
             if (data != null && Object.keys(data).length > 0) {
                 for (let key in data) {
-                    let { email, saved } = data[key];
-                    
-                    // Extraer la fecha (parte antes de la coma) del campo `saved`
-                    let date = saved.split(",")[0];
-                    
-                    // Obtener el contador actual de la fecha o 0 si no existe
-                    let count = countSuscribers.get(date) || 0;
-                    
-                    // Actualizar el contador de la fecha en el mapa
-                    countSuscribers.set(date, count + 1);
-                }
-            }
-            // END
+                  let { personaje } = data[key]; // Extraer el personaje del registro
 
-
-            // Genere y agregue filas de una tabla HTML para mostrar fechas y cantidades de suscriptores almacenadas 
-            if (countSuscribers.size > 0) {
-                subscribers.innerHTML = '';  // Limpiar el contenido previo
+                  // Obtener el contador actual del personaje o 0 si no existe
+                  let count = countCharacters.get(personaje) || 0;
             
-                let index = 1;
-                for (let [date, count] of countSuscribers) {
-                    // Plantilla para mostrar los datos en el elemento HTML
-                    let rowTemplate = `
-                    <tr>
-                        <th>${index}</th>
-                        <td>${date}</td>
-                        <td>${count}</td>
-                    </tr>`
-                    subscribers.innerHTML += rowTemplate;
-                    index++;
+                  // Actualizar el contador del personaje en el mapa
+                  countCharacters.set(personaje, count + 1);
                 }
             }
             // END
+
+
+             // Generar y agregar filas de la tabla HTML
+            if (countCharacters.size > 0) {
+              subscribers.innerHTML = ''; // Limpiar el contenido previo
+
+              let sortedCharacters = Array.from(countCharacters.entries()).sort((a, b) => b[1] - a[1]);
+
+              for (let [character, count] of sortedCharacters) {
+                // Plantilla para mostrar los datos en el elemento HTML
+                let rowTemplate = `
+                  <tr>
+                    
+                    <td>${character}</td>
+                    <td>${count}</td>
+                  </tr>`;
+                subscribers.innerHTML += rowTemplate;
+               
+              }
+            }
             
         }
 
@@ -360,43 +357,43 @@ const loadPersonajes = async () => {
   
       // Actualizar la imagen según la opción seleccionada
       const dynamicImage = document.getElementById("dynamic-image");
-      if (selectedValue === "luffy") {
+      if (selectedValue === "Luffy") {
         dynamicImage.src = "images/form/luffyform.png"; // Ruta de la imagen para A
         dynamicImage.alt = "Imagen de la inicial A";
-      } else if (selectedValue === "zoro") {
+      } else if (selectedValue === "Zoro") {
         dynamicImage.src = "images/form/zoroform.png"; // Ruta de la imagen para B
         dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "sanji") {
+      } else if (selectedValue === "Sanji") {
         dynamicImage.src = "images/form/sanjiform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
-      } else if (selectedValue === "usop") {
+      } else if (selectedValue === "Ussop") {
         dynamicImage.src = "images/form/usopform.png"; // Ruta de la imagen para B
         dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "nami") {
+      } else if (selectedValue === "Nami") {
         dynamicImage.src = "images/form/namiform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
-      } else if (selectedValue === "robin") {
+      } else if (selectedValue === "Robin") {
         dynamicImage.src = "images/form/robinform.png"; // Ruta de la imagen para B
         dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "franky") {
+      } else if (selectedValue === "Franky") {
         dynamicImage.src = "images/form/frankyform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
-      } else if (selectedValue === "brook") {
+      } else if (selectedValue === "Brook") {
         dynamicImage.src = "images/form/brookform.png"; // Ruta de la imagen para B
         dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "chopper") {
+      } else if (selectedValue === "Chopper") {
         dynamicImage.src = "images/form/chopperform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
-      } else if (selectedValue === "jimbe") {
+      } else if (selectedValue === "Jimbe") {
         dynamicImage.src = "images/form/jimbeform.png"; // Ruta de la imagen para B
         dynamicImage.alt = "Imagen de la inicial B";
-      } else if (selectedValue === "ace") {
+      } else if (selectedValue === "Ace") {
         dynamicImage.src = "images/form/aceform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
-      }else if (selectedValue === "sabo") {
+      }else if (selectedValue === "Sabo") {
         dynamicImage.src = "images/form/saboform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
-      }else if (selectedValue === "shanks") {
+      }else if (selectedValue === "Shanks") {
         dynamicImage.src = "images/form/shanksform.png"; // Ruta de la imagen para C
         dynamicImage.alt = "Imagen de la inicial C";
       }
