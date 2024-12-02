@@ -153,7 +153,7 @@ const loadOnePieceFruits = async () => {
                     <div class="card h-100 flip-card">
                         <div class="flip-card-inner">
                             <div class="flip-card-front card-body d-flex flex-column justify-content-center align-items-center style="overflow: hidden;">
-                                <img src="${img}" alt="${fruit.roman_name}" class="img-fluid" style="object-fit:cover;">
+                                <img src="${img}" alt="${fruit.roman_name}" class="img-fluid rounded" style="object-fit:cover;">
                                 <p class="title">${fruit.roman_name}</p>
                             </div>  
                             <div class="flip-card-back card-body d-flex flex-column justify-content-center align-items-center">
@@ -222,7 +222,7 @@ const loadPersonajes = async () => {
   };
 
 
-  const prueba = async () => {
+  const loadedGears = async () => {
     try {
       // URL de la API
       const apiURL = 'https://gears-523d1-default-rtdb.firebaseio.com/.json';
@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loaded();
     loadOnePieceFruits();
     loadPersonajes();
-    prueba();
+    loadedGears();
     updateFormLayout();
     loadSaga();
     getData(); 
