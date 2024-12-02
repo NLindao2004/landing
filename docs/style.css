@@ -585,13 +585,6 @@ a {
   height: 600px;
 }
 
-.background.pattern-bg {
-  background: url(images/pattern-bg.png) no-repeat;
-}
-
-.background.normal-bg {
-  background: url(images/newsletter-image.jpg) no-repeat;
-}
 
 /* large text */
 .title-xlarge {
