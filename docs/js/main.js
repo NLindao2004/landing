@@ -444,7 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
 });
 
-
+setInterval(getData, 3000);
     
 
 
