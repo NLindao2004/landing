@@ -350,28 +350,28 @@
             <div class="mb-3">
               <p class="form-label">Select your gender:</p>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="male" value="chico">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="chico" required>
                 <label class="form-check-label" for="male">Chico</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="female" value="chica">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="chica" >
                 <label class="form-check-label" for="female">Chica</label>
               </div>
             </div>
             <!-- Nombre -->
             <div class="mb-3">
               <label for="form_name" class="form-label">Enter your name:</label>
-              <input type="text" class="form-control" id="form_name" name="name" placeholder="Ingresa tu nombre">
+              <input type="text" class="form-control" id="form_name" name="name" placeholder="Ingresa tu nombre" required>
             </div>
             <!-- Email -->
             <div class="mb-3">
               <label for="form_email" class="form-label">Enter your email:</label>
-              <input type="email" class="form-control" id="form_email" name="email" placeholder="Ingresa tu email">
+              <input type="email" class="form-control" id="form_email" name="email" placeholder="Ingresa tu email" required>
             </div>
             <!-- Inicial favorita -->
             <div class="mb-3">
               <label for="form_initial" class="form-label">Who is your favorite main character?</label>
-              <select class="form-select" id="form_initial" name="personaje" onchange="updateFormLayout()">
+              <select class="form-select" id="form_initial" name="personaje" onchange="updateFormLayout()" required>
                 <option value="" disabled hidden selected>Elija una opción</option>
                 <option value="Luffy">Luffy</option>
                 <option value="Zoro">Zoro</option>
